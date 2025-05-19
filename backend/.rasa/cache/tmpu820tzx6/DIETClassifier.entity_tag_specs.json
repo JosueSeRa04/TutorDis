@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-correct_word",
+      "2": "I-correct_word",
+      "3": "L-correct_word",
+      "4": "U-correct_word",
+      "5": "B-incorrect_word",
+      "6": "I-incorrect_word",
+      "7": "L-incorrect_word",
+      "8": "U-incorrect_word",
+      "9": "B-misspelled_word",
+      "10": "I-misspelled_word",
+      "11": "L-misspelled_word",
+      "12": "U-misspelled_word",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-correct_word": 1,
+      "I-correct_word": 2,
+      "L-correct_word": 3,
+      "U-correct_word": 4,
+      "B-incorrect_word": 5,
+      "I-incorrect_word": 6,
+      "L-incorrect_word": 7,
+      "U-incorrect_word": 8,
+      "B-misspelled_word": 9,
+      "I-misspelled_word": 10,
+      "L-misspelled_word": 11,
+      "U-misspelled_word": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

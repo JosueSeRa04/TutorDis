@@ -1,0 +1,193 @@
+/* Leccion4.css */
+
+/* Contenedor principal */
+.leccion4-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5; /* Gris claro, consistente con otras lecciones */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna, opcional */
+}
+
+/* Tarjeta principal */
+.leccion4-card {
+    max-width: 400px; /* Similar a max-w-md */
+    width: 100%;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Título */
+.leccion4-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3c6c; /* Azul oscuro, consistente con el proyecto */
+    margin-bottom: 16px;
+}
+
+/* Contenedor de palabras */
+.words-container {
+    display: grid;
+    gap: 16px; /* Similar a gap-4 */
+    margin-bottom: 24px;
+}
+
+/* Fila de palabra */
+.word-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Similar a gap-2 */
+}
+
+/* Palabra incompleta */
+.word-incomplete {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333; /* Similar a text-gray-700 */
+}
+
+/* Campo de entrada */
+.word-input {
+    width: 96px; /* Similar a w-24 */
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #e0e0e0; /* Similar a border-gray-300 */
+    border-radius: 6px;
+    transition: border-color 0.2s;
+}
+
+.word-input:focus {
+    border-color: #1976d2; /* Azul del proyecto */
+    outline: none;
+}
+
+.word-input.error {
+    border-color: #d32f2f; /* Rojo, similar a border-red-500 */
+}
+
+.word-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Botón Validar */
+.validate-button {
+    padding: 10px 20px;
+    background-color: #1976d2; /* Azul principal */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.validate-button:hover:not(:disabled) {
+    background-color: #1565c0; /* Azul más oscuro */
+    transform: translateY(-2px);
+}
+
+.validate-button:disabled {
+    background-color: #bdbdbd; /* Gris, similar a bg-gray-400 */
+    cursor: not-allowed;
+}
+
+/* Retroalimentación */
+.feedback {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.feedback-success {
+    color: #2e7d32; /* Verde, similar a text-green-600 */
+}
+
+.feedback-error {
+    color: #c62828; /* Rojo, similar a text-red-600 */
+}
+
+/* Mensaje de respuestas correctas */
+.correct-answers {
+    font-size: 14px;
+    color: #555; /* Similar a text-gray-600 */
+    margin-bottom: 16px;
+}
+
+/* Botón de reinicio */
+.reset-button {
+    padding: 10px 20px;
+    background-color: #1976d2; /* Azul principal */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #1565c0; /* Azul más oscuro */
+    transform: translateY(-2px);
+}
+
+.reset-button:active {
+    transform: translateY(0);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .leccion4-container {
+        padding: 16px;
+    }
+
+    .leccion4-card {
+        padding: 16px;
+    }
+
+    .leccion4-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .words-container {
+        gap: 12px;
+    }
+
+    .word-row {
+        gap: 6px;
+    }
+
+    .word-incomplete {
+        font-size: 16px;
+    }
+
+    .word-input {
+        width: 80px;
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .validate-button,
+    .reset-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .feedback {
+        font-size: 16px;
+    }
+
+    .correct-answers {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,162 @@
+/* Leccion2.css */
+
+/* Contenedor principal */
+.leccion2-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f5f5f5; /* Gris claro, similar a bg-gray-100 */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna, opcional */
+}
+
+/* Título */
+.leccion2-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3c6c; /* Azul oscuro, consistente con el proyecto */
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Oración */
+.sentence {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 24px;
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Palabras interactivas */
+.word {
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    margin: 0 2px; /* Espacio entre palabras */
+}
+
+.word-incorrect {
+    color: #d32f2f; /* Rojo, similar a text-red-500 */
+    font-weight: 600;
+    background-color: #ffebee; /* Fondo rojo claro */
+}
+
+.word-incorrect:hover {
+    background-color: #ffcdd2;
+}
+
+/* Formulario de corrección */
+.correction-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+/* Etiqueta del formulario */
+.correction-label {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Campo de entrada */
+.correction-input {
+    width: 100%;
+    max-width: 256px; /* Similar a w-64 */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+}
+
+.correction-input:focus {
+    border-color: #1976d2; /* Azul del proyecto */
+    outline: none;
+}
+
+/* Botón Verificar */
+.verify-button {
+    padding: 10px 20px;
+    background-color: #1976d2; /* Azul principal */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 8px;
+}
+
+.verify-button:hover {
+    background-color: #1565c0; /* Azul más oscuro */
+    transform: translateY(-2px);
+}
+
+.verify-button:active {
+    transform: translateY(0);
+}
+
+/* Retroalimentación */
+.feedback {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2e7d32; /* Verde, similar a text-green-600 */
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #e8f5e9; /* Fondo verde claro */
+    border: 1px solid #66bb6a;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .leccion2-container {
+        padding: 16px;
+    }
+
+    .leccion2-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .sentence {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    .word {
+        padding: 3px 6px;
+        margin: 0 1px;
+    }
+
+    .correction-label {
+        font-size: 16px;
+    }
+
+    .correction-input {
+        max-width: 200px;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .verify-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .feedback {
+        font-size: 16px;
+        padding: 10px;
+    }
+}

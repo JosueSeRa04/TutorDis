@@ -1,0 +1,71 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - ask_help
+  - submit_error_leccion1
+  - submit_error_leccion2
+  - submit_error_leccion3
+  - submit_error_leccion4
+  - submit_error_leccion5
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+entities:
+  - misspelled_word
+  - correct_word
+slots:
+  misspelled_word:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: misspelled_word
+  correct_word:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: correct_word
+responses:
+  utter_greet:
+    - text: "¡Hola! Soy tu asistente para aprender. ¿En qué te puedo ayudar hoy?"
+  utter_goodbye:
+    - text: "¡Adiós! Espero haberte ayudado. ¡Vuelve pronto!"
+  utter_ask_help:
+    - text: "Parece que necesitas ayuda con '{misspelled_word}'. La palabra correcta es '{correct_word}'. ¿Quieres más ejemplos?"
+  utter_explain_leccion3:
+    - text: "En Lección 3, cometiste un error con '{misspelled_word}'. La palabra correcta es '{correct_word}'. ¿Quieres un ejercicio?"
+  utter_explain_leccion4:
+    - text: "En Lección 4, cometiste un error con '{misspelled_word}'. La palabra correcta es '{correct_word}'. ¿Quieres un ejercicio?"
+  utter_explain_leccion5:
+    - text: "En Lección 5, cometiste un error con '{misspelled_word}'. La palabra correcta es '{correct_word}'. ¿Quieres un ejercicio?"
+  utter_explain_leccion1:
+    - text: "En Lección 1, la palabra formada '{incorrect_word}' es incorrecta. La palabra correcta es '{correct_word}'. ¿Quieres un consejo?"
+  utter_explain_leccion2:
+    - text: "En Lección 2, cometiste un error con '{misspelled_word}'. La palabra correcta es '{correct_word}'. ¿Quieres un ejercicio?"
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "¿Eso te ayudo?"
+
+  utter_happy:
+  - text: "Genial, vamos!"
+
+  utter_iamabot:
+  - text: "Soy una IA impulsada por Rasa"
+
+
+actions:
+  - action_check_spelling
+  - action_explain_error
+
+  
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

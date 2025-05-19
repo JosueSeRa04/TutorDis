@@ -1,0 +1,251 @@
+/* Leccion5.css */
+
+/* Contenedor principal */
+.leccion5-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5; /* Gris claro, consistente con otras lecciones */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna, opcional */
+}
+
+/* Tarjeta principal */
+.leccion5-card {
+    max-width: 480px; /* Similar a max-w-lg */
+    width: 100%;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Título */
+.leccion5-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3c6c; /* Azul oscuro, consistente con el proyecto */
+    margin-bottom: 16px;
+}
+
+/* Imagen */
+.leccion5-image {
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 auto 16px;
+}
+
+/* Área de texto */
+.description-textarea {
+    width: 100%;
+    height: 128px; /* Similar a h-32 */
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0; /* Similar a border-gray-300 */
+    border-radius: 6px;
+    resize: none;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+}
+
+.description-textarea:focus {
+    border-color: #1976d2; /* Azul del proyecto */
+    outline: none;
+}
+
+.description-textarea::placeholder {
+    color: #999;
+}
+
+/* Botón Validar */
+.validate-button {
+    padding: 10px 20px;
+    background-color: #1976d2; /* Azul principal */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.validate-button:hover:not(:disabled) {
+    background-color: #1565c0; /* Azul más oscuro */
+    transform: translateY(-2px);
+}
+
+.validate-button:disabled {
+    background-color: #bdbdbd; /* Gris, similar a bg-gray-400 */
+    cursor: not-allowed;
+}
+
+/* Sección de correcciones */
+.corrections-container {
+    margin-bottom: 16px;
+}
+
+/* Título de palabras mal escritas */
+.misspelled-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #c62828; /* Rojo, similar a text-red-600 */
+    margin-bottom: 8px;
+}
+
+/* Fila de corrección */
+.correction-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+/* Palabra mal escrita */
+.misspelled-word {
+    font-size: 18px;
+    color: #333; /* Similar a text-gray-700 */
+}
+
+/* Input de corrección */
+.correction-input {
+    width: 128px; /* Similar a w-32 */
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #e0e0e0; /* Similar a border-gray-300 */
+    border-radius: 6px;
+    transition: border-color 0.2s;
+}
+
+.correction-input:focus {
+    border-color: #1976d2; /* Azul del proyecto */
+    outline: none;
+}
+
+.correction-input.error {
+    border-color: #d32f2f; /* Rojo, similar a border-red-500 */
+}
+
+.correction-input::placeholder {
+    color: #999;
+}
+
+/* Botón Validar correcciones */
+.validate-corrections-button {
+    padding: 10px 20px;
+    background-color: #1976d2; /* Azul principal */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 8px;
+}
+
+.validate-corrections-button:hover:not(:disabled) {
+    background-color: #1565c0; /* Azul más oscuro */
+    transform: translateY(-2px);
+}
+
+.validate-corrections-button:disabled {
+    background-color: #bdbdbd; /* Gris, similar a bg-gray-400 */
+    cursor: not-allowed;
+}
+
+/* Botón de reinicio */
+.reset-button {
+    padding: 10px 20px;
+    background-color: #1976d2; /* Azul principal */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 16px;
+}
+
+.reset-button:hover {
+    background-color: #1565c0; /* Azul más oscuro */
+    transform: translateY(-2px);
+}
+
+.reset-button:active {
+    transform: translateY(0);
+}
+
+/* Retroalimentación */
+.feedback {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.feedback-success {
+    color: #2e7d32; /* Verde, similar a text-green-600 */
+}
+
+.feedback-error {
+    color: #c62828; /* Rojo, similar a text-red-600 */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .leccion5-container {
+        padding: 16px;
+    }
+
+    .leccion5-card {
+        padding: 16px;
+    }
+
+    .leccion5-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .leccion5-image {
+        width: 250px;
+        height: 125px;
+    }
+
+    .description-textarea {
+        height: 100px;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .misspelled-title {
+        font-size: 16px;
+    }
+
+    .misspelled-word {
+        font-size: 16px;
+    }
+
+    .correction-input {
+        width: 100px;
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .validate-button,
+    .validate-corrections-button,
+    .reset-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .feedback {
+        font-size: 16px;
+    }
+}

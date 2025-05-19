@@ -1,0 +1,35 @@
+version: "3.1"
+rules:
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+- rule: Check spelling for Leccion 3 errors
+  steps:
+  - intent: submit_error_leccion3
+  - action: action_check_spelling
+  - action: action_explain_error
+- rule: Check spelling for Leccion 4 errors
+  steps:
+  - intent: submit_error_leccion4
+  - action: action_check_spelling
+  - action: action_explain_error
+- rule: Check spelling for Leccion 5 errors
+  steps:
+  - intent: submit_error_leccion5
+  - action: action_check_spelling
+  - action: action_explain_error
+- rule: Check word for Leccion 1 errors
+  steps:
+  - intent: submit_error_leccion1
+  - action: action_check_spelling
+  - action: action_explain_error
+- rule: Check spelling for Leccion 2 errors
+  steps:
+  - intent: submit_error_leccion2
+  - action: action_check_spelling
+  - action: action_explain_error
+- rule: Explain error when user asks for help
+  steps:
+  - intent: ask_help
+  - action: action_explain_error

@@ -1,0 +1,157 @@
+/* Leccion3.css */
+
+/* Contenedor principal */
+.leccion3-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5; /* Gris claro, consistente con otras lecciones */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna, opcional */
+}
+
+/* Tarjeta principal */
+.leccion3-card {
+    max-width: 400px; /* Similar a max-w-md */
+    width: 100%;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Título */
+.leccion3-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a3c6c; /* Azul oscuro, consistente con el proyecto */
+    margin-bottom: 16px;
+}
+
+/* Contenedor de botones de palabras */
+.words-container {
+    display: grid;
+    gap: 8px; /* Similar a gap-2 */
+    margin-bottom: 24px;
+}
+
+/* Botón de palabra */
+.word-button {
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333; /* Similar a text-gray-800 */
+    background-color: #e0e0e0; /* Gris claro, similar a bg-gray-200 */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.word-button:hover:not(:disabled) {
+    background-color: #bdbdbd; /* Gris más oscuro, similar a hover:bg-gray-300 */
+    transform: translateY(-2px);
+}
+
+.word-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.word-button.selected-correct {
+    background-color: #4caf50; /* Verde, similar a bg-green-500 */
+    color: #ffffff;
+}
+
+.word-button.selected-incorrect {
+    background-color: #d32f2f; /* Rojo, similar a bg-red-500 */
+    color: #ffffff;
+}
+
+/* Retroalimentación */
+.feedback {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.feedback-success {
+    color: #2e7d32; /* Verde, similar a text-green-600 */
+}
+
+.feedback-error {
+    color: #c62828; /* Rojo, similar a text-red-600 */
+}
+
+/* Mensaje de palabra correcta */
+.correct-word-message {
+    font-size: 14px;
+    color: #555; /* Similar a text-gray-600 */
+    margin-bottom: 16px;
+}
+
+.correct-word-message span {
+    font-weight: 700;
+}
+
+/* Botón de reinicio */
+.reset-button {
+    padding: 10px 20px;
+    background-color: #1976d2; /* Azul principal */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #1565c0; /* Azul más oscuro */
+    transform: translateY(-2px);
+}
+
+.reset-button:active {
+    transform: translateY(0);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .leccion3-container {
+        padding: 16px;
+    }
+
+    .leccion3-card {
+        padding: 16px;
+    }
+
+    .leccion3-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .words-container {
+        gap: 6px;
+    }
+
+    .word-button {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .feedback {
+        font-size: 16px;
+    }
+
+    .correct-word-message {
+        font-size: 12px;
+    }
+
+    .reset-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}

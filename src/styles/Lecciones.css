@@ -1,0 +1,89 @@
+/* Lecciones.css */
+
+/* Contenedor principal */
+.LeccionesDiv {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Roboto', sans-serif; /* Opcional: fuente moderna */
+}
+
+/* Título/descripción */
+.LeccionesDiv p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+/* Contenedor de enlaces */
+.lecciones-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Enlaces de lecciones */
+.leccion-link {
+    display: block;
+    padding: 12px 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1976d2;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.leccion-link:hover {
+    background-color: #e3f2fd;
+    border-color: #90caf9;
+    color: #1565c0;
+}
+
+/* Enlace "Volver al inicio" */
+.text-blue-500 {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1976d2;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.text-blue-500:hover {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    text-decoration: underline;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .LeccionesDiv {
+        margin: 20px;
+        padding: 16px;
+    }
+
+    .LeccionesDiv p {
+        font-size: 16px;
+    }
+
+    .leccion-link {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+
+    .text-blue-500 {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
