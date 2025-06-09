@@ -19,7 +19,7 @@ import Buscar from './Componentes/BuscarHijos';
 import ListadoHijos from './Componentes/ListadoHijosPadre';
 import ListadoAlumnos from './Componentes/ListadoHijosMaestro';
 import ListadoRelacionesHijo from './Componentes/ListadoRelacionesHijo';
-
+import Descargas from './Componentes/ExportarPDF';
 
 function App() {
 
@@ -96,6 +96,9 @@ function App() {
         />
         <Route
           path='/descargas'
+          element = {
+            <Descargas/>
+          }
         />
         <Route
           path='/maestrohijo'

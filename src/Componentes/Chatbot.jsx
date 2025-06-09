@@ -1,81 +1,97 @@
-import React, { useState, useEffect } from 'react';
+// Chatbot.jsx
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
 import '../styles/Chatbot.css';
 
-const Chatbot = ({ lessonNumber, errorData }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [userInput, setUserInput] = useState('');
+const Chatbot = forwardRef(({ lessonContext }, ref) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-    // Abrir el chatbot automáticamente si se detecta un error
-    useEffect(() => {
-        if(errorData && errorData.error_detected){
-            setIsOpen(true);
-            setMessages([{sender: 'bot', text: errorData.message }])
-        }
-    }, [errorData]);
+  useImperativeHandle(ref, () => ({
+    handleErrorDetected
+  }));
 
-    // Enviar mensaje del usuario al backend
-    const sendMessage = async () => {
-        if(!userInput.trim()) return;
+  const sendMessage = async () => {
+    if (!input.trim()) return;
+    const userMessage = { role: 'user', content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
 
-        const newMessages = [...messages, { sender: 'user', text: userInput}];
-        setMessages(newMessages);
-        setUserInput('');
+    try {
+      const response = await axios.post('http://localhost:8000/chat', {
+        prompt: input,
+        lesson_context: lessonContext,
+        error_data: null,
+      });
+      const botMessage = { role: 'bot', content: response.data.response };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      const errorMessage = {
+        role: 'bot',
+        content: `Error: ${error.response?.data?.error || 'No se pudo conectar con el chatbot.'}`,
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-        try {
-            const response = await axios.post('http://localhost:5001/check-error', {
-                text: userInput,
-                lesson_number: lessonNumber,
-            });
-            const botMessage = response.data.message;
-            setMessages([...newMessages, { sender: 'bot', text: botMessage }]);
-        } catch(error){
-            setMessages([...newMessages, { sender: 'bot', text: 'Error al conectar con el servidor. '}]);
-        }
-    };
+  const handleErrorDetected = async (errorData) => {
+    if (!errorData) return;
+    setIsLoading(true);
+    try {
+      const response = await axios.post('http://localhost:8000/chat', {
+        prompt: "Proporciona retroalimentación sobre el error cometido.",
+        lesson_context: lessonContext,
+        error_data: errorData,
+      });
+      const botMessage = { role: 'bot', content: response.data.response };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      const errorMessage = {
+        role: 'bot',
+        content: `Error: ${error.response?.data?.error || 'No se pudo conectar con el chatbot.'}`,
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    // Manejar la tecla Enter
-    const handleKeyPress = (e) => {
-        if(e.key === 'Enter'){
-            sendMessage();
-        }
-    };
-    
-    return (
-        <div className="chatbot-container">
-      {!isOpen && (
-        <button className="chatbot-toggle" onClick={() => setIsOpen(true)}>
-          🗨️
-        </button>
-      )}
+  return (
+    <div className="chatbot-container">
+      <button className="chatbot-toggle" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? 'Cerrar Chat' : 'Abrir Chat'}
+      </button>
       {isOpen && (
         <div className="chatbot-window">
-          <div className="chatbot-header">
-            <span>Asistente de Aprendizaje</span>
-            <button onClick={() => setIsOpen(false)}>✖</button>
-          </div>
           <div className="chatbot-messages">
             {messages.map((msg, index) => (
-              <div key={index} className={`message ${msg.sender}`}>
-                {msg.text}
+              <div key={index} className={`message ${msg.role}`}>
+                <span>{msg.content}</span>
               </div>
             ))}
+            {isLoading && <div className="message bot">Cargando...</div>}
           </div>
           <div className="chatbot-input">
             <input
               type="text"
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Escribe tu mensaje..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              placeholder="Escribe tu pregunta..."
             />
-            <button onClick={sendMessage}>Enviar</button>
+            <button onClick={sendMessage} disabled={isLoading}>
+              Enviar
+            </button>
           </div>
         </div>
       )}
     </div>
-    );
-};
+  );
+});
 
 export default Chatbot;
