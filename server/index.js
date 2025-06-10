@@ -6,6 +6,9 @@ const { Pool } = require('pg');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const { useCallback } = require('react');
+const axios = require('axios');
+const { FcFeedback } = require('react-icons/fc');
+const { spawn } = require('child_process');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -325,6 +328,108 @@ app.post('/api/login', async(req, res) => {
         res.status(500).send('Error en el servidor');
     }
 });
+
+// Solicitud del modelo de IA
+app.post('/api/gpt4all', async (req, res) => {
+  const userInput = req.body.prompt;
+
+  // Aquí puedes invocar GPT4All desde Python, o usar un wrapper
+  const python = spawn('python', ['C:/Users/josus/OneDrive/Escritorio/appdis/backend/app.py']);
+
+  let output = '';
+  python.stdout.on('data', (data) => {
+    output += data.toString();
+  });
+
+  python.stdin.write(userInput + '\n'); // Enviar mensaje
+  python.stdin.end();
+
+  python.on('close', () => {
+    res.json({ response: output });
+  });
+});
+
+// Endpoint para poder registrar el progreso del niño al realizar una leccion
+app.post('/api/guardar-intento', authenticateToken, async (req, res) => {
+  const { id_ejercicio, resultado, erroresDetectados } = req.body;
+  const id_usuario = req.user.id_usuario;
+
+  try {
+    const query = `
+      INSERT INTO "intentoEjercicio" 
+        (id_usuario, id_ejercicio, "fechaRealizacion", resultado, "erroresDetectados")
+      VALUES 
+        ($1, $2, CURRENT_DATE, $3, $4)
+    `;
+
+    await pool.query(query, [id_usuario, id_ejercicio, resultado, erroresDetectados]);
+
+    res.status(201).json({ message: "Intento guardado correctamente." });
+  } catch (err) {
+    console.error('Error al guardar intento:', err.message);
+    res.status(500).json({ message: 'Error al guardar intento' });
+  }
+});
+
+// Generar un reporte manual para un alumno
+app.post('/api/generar-reporte', authenticateToken, async (req, res) => {
+  try {
+    const { id_usuario, contenido } = req.body;
+    const id_maestro = req.user.id_usuario;
+
+    if (!id_usuario || !contenido) {
+      return res.status(400).json({ message: 'Faltan datos requeridos' });
+    }
+
+    const query = `
+      INSERT INTO "Reporte" (id_usuario, id_maestro, "fechaGeneracion", contenido)
+      VALUES ($1, $2, NOW(), $3)
+      RETURNING *
+    `;
+    const result = await pool.query(query, [id_usuario, id_maestro, contenido]);
+
+    res.status(201).json({ message: 'Reporte generado exitosamente', reporte: result.rows[0] });
+  } catch (error) {
+    console.error('Error en /api/generar-reporte:', error.message);
+    res.status(500).json({ message: 'Error en el servidor al generar el reporte' });
+  }
+});
+
+// Obtener estadísticas de un alumno
+app.get('/api/estadisticas/:id_usuario', authenticateToken, async (req, res) => {
+  const id_usuario = parseInt(req.params.id_usuario);
+
+  try {
+    const progresoQuery = `
+      SELECT "puntajeTotal", "nivelActual", "desempeño"
+      FROM "Progreso"
+      WHERE id_usuario = $1
+    `;
+    const progresoResult = await pool.query(progresoQuery, [id_usuario]);
+
+    const intentoQuery = `
+      SELECT COUNT(*) as total_intentos,
+             AVG("erroresDetectados") as promedio_errores,
+             MAX("fechaRealizacion") as ultima_fecha
+      FROM "intentoEjercicio"
+      WHERE id_usuario = $1
+    `;
+    const intentoResult = await pool.query(intentoQuery, [id_usuario]);
+
+    if (progresoResult.rows.length === 0 && intentoResult.rows.length === 0) {
+      return res.status(404).json({ message: 'No hay estadísticas registradas para este usuario' });
+    }
+
+    res.json({
+      ...progresoResult.rows[0],
+      ...intentoResult.rows[0]
+    });
+  } catch (error) {
+    console.error('Error en /api/estadisticas:', error.message);
+    res.status(500).json({ message: 'Error en el servidor al obtener estadísticas' });
+  }
+});
+
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
