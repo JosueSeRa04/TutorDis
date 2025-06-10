@@ -1,5 +1,6 @@
 // Leccion3.jsx
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import '../styles/Leccion3.css';
 import Chatbot from './Chatbot';
 
@@ -22,22 +23,37 @@ function Leccion3() {
   En esta lección, los estudiantes deben seleccionar la palabra correctamente escrita de una lista de opciones. La palabra correcta es "Completamente".
   `;
 
-  const handleSelect = (word) => {
+  const handleSelect = async (word) => {
     setSelectedWord(word);
-    if (word === correctWord) {
-      setResult('¡Correcto!');
-    } else {
-      setResult('Incorrecto, intenta de nuevo.');
+    const isCorrect = word === correctWord;
+    setResult(isCorrect ? '¡Correcto!' : 'Incorrecto, intenta de nuevo.');
 
-      // 🚨 Enviar retroalimentación al chatbot
-      if (chatbotRef.current) {
-        chatbotRef.current.handleErrorDetected({
-          selected_word: word,
-          correct_word: correctWord,
-        });
-      }
+    // Guardar intento en la base de datos
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('http://localhost:5000/api/guardar-intento', {
+        id_ejercicio: 3, // Lección 3
+        resultado: isCorrect ? 'correcto' : 'incorrecto',
+        erroresDetectados: isCorrect ? 0 : 1,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Intento guardado');
+    } catch (error) {
+      console.error('Error al guardar intento:', error);
+    }
+
+    // 2. Activar retroalimentación del chatbot si fue incorrecto
+    if (!isCorrect && chatbotRef.current) {
+      chatbotRef.current.handleErrorDetected({
+        selected_word: word,
+        correct_word: correctWord,
+      });
     }
   };
+
 
   const handleReset = () => {
     setSelectedWord(null);

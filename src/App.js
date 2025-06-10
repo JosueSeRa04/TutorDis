@@ -20,6 +20,7 @@ import ListadoHijos from './Componentes/ListadoHijosPadre';
 import ListadoAlumnos from './Componentes/ListadoHijosMaestro';
 import ListadoRelacionesHijo from './Componentes/ListadoRelacionesHijo';
 import Descargas from './Componentes/ExportarPDF';
+import Reportes from './Componentes/ReporteNiños';
 
 function App() {
 
@@ -93,6 +94,14 @@ function App() {
           element={
             <Lecciones/>
           }
+        />
+        <Route 
+          path='/reportes'
+          element = {
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <Reportes token = {localStorage.getItem('token')}/>
+            </ProtectedRoute>
+        }
         />
         <Route
           path='/descargas'

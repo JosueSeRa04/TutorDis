@@ -1,5 +1,6 @@
 // Leccion4.jsx
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import '../styles/Leccion4.css';
 import Chatbot from './Chatbot';
 
@@ -25,35 +26,49 @@ function Leccion4() {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isCorrect = answers.every((answer, index) =>
       answer.toLowerCase() === words[index].complete.toLowerCase()
     );
 
-    if (isCorrect) {
-      setResult('¡Correcto!');
-    } else {
-      setResult('Incorrecto, revisa tus respuestas.');
+    setResult(isCorrect ? '¡Correcto!' : 'Incorrecto, revisa tus respuestas.');
 
-      // 🚨 Detectar los errores y enviar al chatbot
-      const incorrectAnswers = answers
-        .map((answer, index) => ({
-          user_answer: answer,
-          correct_answer: words[index].complete,
-          word_index: index,
-          original_incomplete: words[index].incomplete,
-        }))
-        .filter(({ user_answer, correct_answer }) =>
-          user_answer.toLowerCase() !== correct_answer.toLowerCase()
-        );
+    const incorrectAnswers = answers
+      .map((answer, index) => ({
+        user_answer: answer,
+        correct_answer: words[index].complete,
+        word_index: index,
+        original_incomplete: words[index].incomplete,
+      }))
+      .filter(({ user_answer, correct_answer }) =>
+        user_answer.toLowerCase() !== correct_answer.toLowerCase()
+      );
 
-      if (chatbotRef.current && incorrectAnswers.length > 0) {
-        chatbotRef.current.handleErrorDetected({
-          incorrect_answers: incorrectAnswers,
-        });
-      }
+    // GUARDAR INTENTO EN EL BACKEND
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('http://localhost:5000/api/guardar-intento', {
+        id_ejercicio: 4, // Lección 4
+        resultado: isCorrect ? 'correcto' : 'incorrecto',
+        erroresDetectados: incorrectAnswers.length,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Intento registrado en la BD');
+    } catch (error) {
+      console.error('Error al registrar intento:', error);
+    }
+
+    // Enviar errores al chatbot
+    if (!isCorrect && chatbotRef.current && incorrectAnswers.length > 0) {
+      chatbotRef.current.handleErrorDetected({
+        incorrect_answers: incorrectAnswers,
+      });
     }
   };
+
 
   const handleReset = () => {
     setAnswers(words.map(() => ''));

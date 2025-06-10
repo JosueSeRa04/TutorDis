@@ -1,5 +1,6 @@
 // Leccion5.jsx
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import paisaje from '../paisaje.jpg';
 import Chatbot from '../Componentes/Chatbot';
 import '../styles/Leccion5.css';
@@ -55,7 +56,7 @@ function Leccion5() {
     } else {
       setResult('Corrige las palabras mal escritas.');
 
-      // 🚨 Enviar retroalimentación al chatbot
+      // Enviar retroalimentación al chatbot
       if (chatbotRef.current) {
         const errores = incorrectOriginal.map((word) => ({
           incorrect_word: word,
@@ -72,14 +73,33 @@ function Leccion5() {
     setCorrections(newCorrections);
   };
 
-  const handleValidateCorrections = () => {
+  const handleValidateCorrections = async () => {
     const allCorrect = corrections.every(
       (correction, index) =>
         correction.toLowerCase() ===
         commonMistakes[misspelledWords[index]].toLowerCase()
     );
+
     setResult(allCorrect ? '¡Correcciones correctas!' : 'Algunas correcciones no son válidas.');
+
+    // GUARDAR INTENTO EN LA BD
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('http://localhost:5000/api/guardar-intento', {
+        id_ejercicio: 5, // Lección 5
+        resultado: allCorrect ? 'correcto' : 'incorrecto',
+        erroresDetectados: misspelledWords.length,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Intento registrado para la lección 5');
+    } catch (error) {
+      console.error('Error al registrar intento:', error);
+    }
   };
+
 
   const handleReset = () => {
     setDescription('');

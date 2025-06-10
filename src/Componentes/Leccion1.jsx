@@ -3,12 +3,15 @@ import React, { useState, useCallback, useRef } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable, rectSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import axios from 'axios';
 import '../styles/Leccion1.css';
 import Chatbot from './Chatbot';
 
 const lessonContext = `
 Esta lección enseña a ordenar letras para formar la palabra correcta "CONTRAER" usando una interfaz de arrastrar y soltar. Los estudiantes deben reorganizar las letras desordenadas.
 `;
+
+const token = localStorage.getItem('token');
 
 const shuffleArray = (array) => {
   return array.sort(() => Math.random() - 0.5);
@@ -31,12 +34,30 @@ const Leccion1 = () => {
     }
   };
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     const currentWord = letters.join('');
-    if (currentWord === correctWord) {
-      setMessage('¡Correcto! Muy bien hecho.');
-    } else {
-      setMessage('Inténtalo de nuevo.');
+    const esCorrecto = currentWord === correctWord;
+    setMessage(esCorrecto ? '¡Correcto! Muy bien hecho.' : 'Inténtalo de nuevo.');
+
+    // Registrar el intento en la base de datos
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('http://localhost:5000/api/guardar-intento', {
+        id_ejercicio: 1, 
+        resultado: esCorrecto ? 'correcto' : 'incorrecto',
+        erroresDetectados: esCorrecto ? 0 : 1,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Intento guardado.');
+    } catch (error) {
+      console.error('Error al guardar intento:', error);
+    }
+
+    // Enviar el error al chatbot si es incorrecto
+    if (!esCorrecto) {
       const errorData = {
         incorrect_word: currentWord,
         correct_word: correctWord,
@@ -46,6 +67,7 @@ const Leccion1 = () => {
       }
     }
   }, [letters, correctWord]);
+
 
   return (
     <div className="leccion1-container">

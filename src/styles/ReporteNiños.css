@@ -1,0 +1,73 @@
+.reporte-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f3f4f6;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 30px auto;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reporte-title {
+  font-size: 28px;
+  color: #4338ca;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.stats-box {
+  width: 100%;
+  background-color: #e0e7ff;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  color: #1e1b4b;
+}
+
+.stats-box p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.textarea-reporte {
+  width: 100%;
+  height: 150px;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  resize: none;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.button-guardar-reporte {
+  background-color: #4f46e5;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.button-guardar-reporte:hover {
+  background-color: #4338ca;
+}
+
+.success-message {
+  color: green;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.error-message {
+  color: red;
+  margin-top: 15px;
+  font-weight: bold;
+}

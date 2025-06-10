@@ -4,6 +4,8 @@ import axios from 'axios';
 import '../styles/Leccion2.css';
 import Chatbot from './Chatbot';
 
+const token = localStorage.getItem('token');
+
 function Leccion2() {
   const [selectedWord, setSelectedWord] = useState('');
   const [correction, setCorrection] = useState('');
@@ -27,25 +29,38 @@ function Leccion2() {
     setCorrection('');
   };
 
-  const handleCorrectionSubmit = () => {
+  const handleCorrectionSubmit = async () => {
     const expected = correctWords[selectedWord];
     const isCorrect = expected && correction.toLowerCase() === expected.toLowerCase();
 
-    if (isCorrect) {
-      setFeedback('¡Correcto!');
-    } else {
-      setFeedback('Inténtalo de nuevo.');
+    setFeedback(isCorrect ? '¡Correcto!' : 'Inténtalo de nuevo.');
 
-      // 🚨 Activamos retroalimentación del chatbot
-      if (chatbotRef.current) {
-        chatbotRef.current.handleErrorDetected({
-          selected_word: selectedWord,
-          user_input: correction,
-          expected_correction: expected,
-        });
-      }
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('http://localhost:5000/api/guardar-intento', {
+        id_ejercicio: 2, // Lección 2
+        resultado: isCorrect ? 'correcto' : 'incorrecto',
+        erroresDetectados: isCorrect ? 0 : 1,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Intento guardado');
+    } catch (err) {
+      console.error('Error al guardar intento:', err);
+    }
+
+    // Activamos retroalimentación del chatbot si hay error
+    if (!isCorrect && chatbotRef.current) {
+      chatbotRef.current.handleErrorDetected({
+        selected_word: selectedWord,
+        user_input: correction,
+        expected_correction: expected,
+      });
     }
   };
+
 
   return (
     <div className="leccion2-container">
