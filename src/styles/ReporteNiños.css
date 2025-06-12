@@ -1,73 +1,312 @@
+/* ReporteNiños.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 .reporte-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f3f4f6;
-  padding: 40px;
-  border-radius: 20px;
-  max-width: 700px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 1000px;
   margin: 30px auto;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 24px;
+  box-shadow: 0 20px 25px -5px rgba(88, 91, 211, 0.1), 
+              0 10px 10px -5px rgba(88, 91, 211, 0.04);
+  overflow: hidden;
+  position: relative;
 }
 
-.reporte-title {
-  font-size: 28px;
-  color: #4338ca;
-  margin-bottom: 20px;
-  font-weight: bold;
+.reporte-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #585bd3, #7c7ff0, #585bd3);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
 }
 
-.stats-box {
-  width: 100%;
-  background-color: #e0e7ff;
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 25px;
-  color: #1e1b4b;
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-.stats-box p {
-  margin: 8px 0;
-  font-size: 16px;
-}
-
-.textarea-reporte {
-  width: 100%;
-  height: 150px;
-  padding: 15px;
-  border: none;
-  border-radius: 12px;
-  resize: none;
-  font-size: 16px;
-  background-color: #fff;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-.button-guardar-reporte {
-  background-color: #4f46e5;
+.reporte-container h2 {
+  background: linear-gradient(135deg, #585bd3 0%, #4c4fbe 100%);
   color: white;
-  padding: 12px 24px;
-  border: none;
+  margin: 0;
+  padding: 32px 40px;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.reporte-container h2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Loading States */
+.reporte-container p {
+  color: #64748b;
+  text-align: center;
+  padding: 20px;
+  font-weight: 500;
+}
+
+.error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  color: #dc2626;
+  padding: 16px 24px;
+  margin: 20px 40px;
   border-radius: 12px;
+  border-left: 4px solid #dc2626;
+  font-weight: 500;
+}
+
+/* Estadísticas Section */
+.estadisticas {
+  background: white;
+  margin: 0 40px 30px;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px -1px rgba(88, 91, 211, 0.1);
+  border: 1px solid rgba(88, 91, 211, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.estadisticas::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #585bd3, transparent, #585bd3);
+}
+
+.estadisticas p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+  color: #334155;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.estadisticas p:last-child {
+  border-bottom: none;
+}
+
+.estadisticas p:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding-left: 16px;
+  border-radius: 8px;
+  transform: translateX(4px);
+}
+
+.estadisticas p strong {
+  color: #585bd3;
+  font-weight: 600;
+  min-width: 180px;
+}
+
+/* Textarea */
+.textarea-reporte {
+  width: calc(100% - 80px);
+  min-height: 200px;
+  margin: 0 40px 24px;
+  padding: 24px;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  background: white;
+  color: #334155;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(88, 91, 211, 0.05);
+}
+
+.textarea-reporte:focus {
+  outline: none;
+  border-color: #585bd3;
+  box-shadow: 0 0 0 3px rgba(88, 91, 211, 0.1),
+              0 4px 12px rgba(88, 91, 211, 0.15);
+  transform: translateY(-2px);
+}
+
+.textarea-reporte::placeholder {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Buttons */
+.btn-generar {
+  background: linear-gradient(135deg, #585bd3 0%, #4c4fbe 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  margin: 0 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(88, 91, 211, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.button-guardar-reporte:hover {
-  background-color: #4338ca;
+.btn-generar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
 }
 
-.success-message {
-  color: green;
-  margin-top: 15px;
-  font-weight: bold;
+.btn-generar:hover::before {
+  left: 100%;
 }
 
-.error-message {
-  color: red;
-  margin-top: 15px;
-  font-weight: bold;
+.btn-generar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(88, 91, 211, 0.4);
+  background: linear-gradient(135deg, #4c4fbe 0%, #585bd3 100%);
+}
+
+.btn-generar:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(88, 91, 211, 0.3);
+}
+
+/* Button container */
+.reporte-container > div:last-child {
+  text-align: center;
+  padding: 0 40px;
+}
+
+/* Messages */
+.mensaje-reporte {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  color: #16a34a;
+  padding: 16px 24px;
+  margin: 20px 40px;
+  border-radius: 12px;
+  border-left: 4px solid #16a34a;
+  font-weight: 500;
+  text-align: center;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reporte-container {
+    margin: 20px;
+    border-radius: 20px;
+  }
+  
+  .reporte-container h2 {
+    padding: 24px 20px;
+    font-size: 24px;
+  }
+  
+  .estadisticas {
+    margin: 0 20px 20px;
+    padding: 24px 20px;
+  }
+  
+  .textarea-reporte {
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+    padding: 20px;
+  }
+  
+  .btn-generar {
+    margin: 0 8px 20px;
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+  
+  .mensaje-reporte {
+    margin: 20px;
+  }
+  
+  .error {
+    margin: 20px;
+  }
+}
+
+/* Loading Animation */
+.reporte-container p:first-of-type {
+  position: relative;
+}
+
+.reporte-container p:first-of-type::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid #585bd3;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Micro-interactions */
+.reporte-container {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

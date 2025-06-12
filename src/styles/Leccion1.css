@@ -7,26 +7,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background-color: #f5f5f5; /* Fondo gris claro, similar a bg-gray-100 */
-    font-family: 'Roboto', sans-serif; /* Fuente moderna, opcional */
+    padding: 32px;
+    background: linear-gradient(135deg, #f7f9fc 0%, #e8ecef 100%); /* Fondo degradado elegante */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; /* Fuente moderna y profesional */
 }
 
 /* Título */
 .leccion1-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #1a3c6c; /* Azul oscuro, consistente con tu proyecto */
-    margin-bottom: 24px;
+    font-size: 36px;
+    font-weight: 600;
+    color: #1e3a8a; /* Azul profundo y sofisticado */
+    margin-bottom: 32px;
     text-align: center;
+    letter-spacing: -0.02em; /* Espaciado sutil para elegancia */
 }
 
 /* Contenedor de letras */
 .letters-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px; /* Espaciado entre bloques, similar a gap-4 */
-    margin-bottom: 24px;
+    gap: 20px; /* Espaciado más amplio para un diseño limpio */
+    margin-bottom: 32px;
     justify-content: center;
 }
 
@@ -34,92 +35,99 @@
 .letter-block {
     padding: 16px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* Bordes más redondeados para suavidad */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); /* Sombra más suave y profesional */
     font-size: 24px;
-    font-weight: 700;
-    color: #333;
+    font-weight: 600;
+    color: #2d3748; /* Gris oscuro para mejor contraste */
     cursor: grab;
     user-select: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    min-width: 48px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición más fluida */
+    min-width: 56px;
     text-align: center;
 }
 
 .letter-block:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px) scale(1.03); /* Efecto de elevación sutil */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Sombra más pronunciada al hover */
 }
 
 .letter-block:active {
     cursor: grabbing;
+    transform: scale(0.98); /* Efecto de presión al clic */
 }
 
 /* Botón Verificar */
 .verify-button {
-    padding: 12px 24px;
-    background-color: #1976d2; /* Azul principal de tu proyecto */
+    padding: 14px 32px;
+    background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%); /* Degradado para un botón más dinámico */
     color: #ffffff;
     font-size: 16px;
     font-weight: 500;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px; /* Bordes más redondeados */
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-    margin-bottom: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
+    margin-bottom: 24px;
+    text-transform: uppercase; /* Para un toque de autoridad */
+    letter-spacing: 0.05em; /* Espaciado de letras para claridad */
 }
 
 .verify-button:hover {
-    background-color: #1565c0; /* Azul más oscuro */
+    background: linear-gradient(90deg, #1e40af 0%, #1e3a8a 100%); /* Degradado más oscuro */
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); /* Sombra azulada al hover */
 }
 
 .verify-button:active {
     transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
 }
 
 /* Mensaje de retroalimentación */
 .message {
     font-size: 18px;
-    font-weight: 600;
-    color: #333;
+    font-weight: 500;
+    color: #1f2937; /* Gris oscuro elegante */
     text-align: center;
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #e3f2fd; /* Fondo azul claro para destacar */
-    border: 1px solid #90caf9;
-    max-width: 400px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #f0f7ff; /* Fondo azul muy claro para destacar */
+    border: 1px solid #bfdbfe; /* Borde azul suave */
+    max-width: 480px;
     width: 100%;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06); /* Sombra ligera */
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
     .leccion1-container {
-        padding: 16px;
+        padding: 24px;
     }
 
     .leccion1-title {
-        font-size: 24px;
-        margin-bottom: 16px;
+        font-size: 28px;
+        margin-bottom: 24px;
     }
 
     .letters-container {
-        gap: 12px;
+        gap: 16px;
     }
 
     .letter-block {
         padding: 12px;
         font-size: 20px;
-        min-width: 40px;
+        min-width: 48px;
     }
 
     .verify-button {
-        padding: 10px 20px;
+        padding: 12px 24px;
         font-size: 14px;
     }
 
     .message {
         font-size: 16px;
-        padding: 10px;
+        padding: 12px;
+        max-width: 100%;
     }
 }

@@ -1,92 +1,327 @@
-    /* ListadoHijosPadre.css */
-.listado-hijos-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+/* ListadoHijosPadre.css */
 
-.listado-hijos-container h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.loading,
-.error,
-.no-hijos {
-    font-size: 16px;
-    color: #555;
-    text-align: center;
-    padding: 20px;
-}
-
-.error {
-    color: #d32f2f;
-}
-
-.hijos-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    border-radius: 8px;
+/* Contenedor principal */
+.listado-hijos {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 
+        0 32px 64px rgba(88, 91, 211, 0.12),
+        0 16px 32px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
     overflow: hidden;
+    animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.hijos-table thead {
-    background-color: #1976d2;
-    color: #fff;
+/* Efecto de brillo sutil en el fondo */
+.listado-hijos::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(88, 91, 211, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(79, 70, 229, 0.03) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
 }
 
-.hijos-table th {
-    padding: 12px;
+/* Título */
+.listado-hijos h2 {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 700;
+    background: linear-gradient(135deg, #585bd3 0%, #4f46e5 50%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+    text-align: center;
+    animation: slideInDown 0.8s ease-out 0.2s both;
+}
+
+/* Línea decorativa bajo el título */
+.listado-hijos h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #585bd3, #4f46e5);
+    border-radius: 2px;
+}
+
+/* Mensaje de carga y error */
+.listado-hijos .loading,
+.listado-hijos .error {
+    font-size: 18px;
+    color: #64748b;
+    text-align: center;
+    margin: 36px 0;
+    line-height: 1.6;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 0.8s ease-out 0.3s both;
+}
+
+.listado-hijos .error {
+    color: #e11d48;
+}
+
+/* Mensaje de "No hay hijos" */
+.listado-hijos p {
+    font-size: 18px;
+    color: #64748b;
+    text-align: center;
+    margin: 36px 0;
+    line-height: 1.6;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 0.8s ease-out 0.3s both;
+}
+
+/* Tabla */
+.listado-hijos table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+/* Encabezados de la tabla */
+.listado-hijos th {
     font-size: 16px;
     font-weight: 600;
+    color: #334155;
+    padding: 20px 24px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 2;
     text-align: left;
 }
 
-.hijos-table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.2s;
+/* Celdas de la tabla */
+.listado-hijos td {
+    font-size: 16px;
+    color: #334155;
+    padding: 20px 24px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
 }
 
-.hijos-table tbody tr:hover {
-    background-color: #f5f5f5;
+/* Efecto hover en filas */
+.listado-hijos tr:hover td {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 16px 32px rgba(88, 91, 211, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+    border-color: rgba(88, 91, 211, 0.3);
+    color: #585bd3;
 }
 
-.hijos-table td {
-    padding: 12px;
-    font-size: 14px;
-    color: #333;
+.listado-hijos td::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(88, 91, 211, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%);
+    transition: left 0.5s ease;
+    z-index: -1;
 }
 
-.hijos-table td:empty::after,
-.hijos-table td.no-especificado::after {
-    content: 'No especificado';
-    color: #888;
+.listado-hijos tr:hover td::before {
+    left: 0;
 }
 
+/* Separador visual entre filas */
+.listado-hijos tr:not(:last-child) td::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.2), transparent);
+}
+
+/* Animaciones */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Diseño responsivo */
 @media (max-width: 768px) {
-    .listado-hijos-container {
-        padding: 10px;
+    .listado-hijos {
+        margin: 20px 16px;
+        padding: 32px 24px;
+        border-radius: 20px;
     }
 
-    .listado-hijos-container h2 {
-        font-size: 20px;
+    .listado-hijos h2 {
+        font-size: 28px;
+        margin-bottom: 16px;
     }
 
-    .hijos-table th,
-    .hijos-table td {
-        font-size: 12px;
-        padding: 8px;
+    .listado-hijos p,
+    .listado-hijos .loading,
+    .listado-hijos .error {
+        font-size: 16px;
+        margin-bottom: 28px;
     }
 
-    .hijos-table {
+    .listado-hijos th,
+    .listado-hijos td {
+        font-size: 15px;
+        padding: 16px 20px;
+    }
+
+    /* Convertir tabla en bloques para pantallas pequeñas */
+    .listado-hijos table {
         display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+    }
+
+    .listado-hijos thead,
+    .listado-hijos tbody,
+    .listado-hijos tr {
+        display: block;
+    }
+
+    .listado-hijos th {
+        display: none;
+    }
+
+    .listado-hijos td {
+        display: block;
+        text-align: left;
+        padding: 16px 20px;
+        position: relative;
+        border: none;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .listado-hijos td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #585bd3;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .listado-hijos td:not(:last-child)::after {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .listado-hijos {
+        margin: 16px 12px;
+        padding: 24px 20px;
+    }
+
+    .listado-hijos h2 {
+        font-size: 24px;
+    }
+
+    .listado-hijos p,
+    .listado-hijos .loading,
+    .listado-hijos .error {
+        font-size: 15px;
+    }
+
+    .listado-hijos th,
+    .listado-hijos td {
+        font-size: 14px;
+        padding: 14px 16px;
+    }
+}
+
+/* Efecto de partículas flotantes */
+@media (prefers-reduced-motion: no-preference) {
+    .listado-hijos::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            radial-gradient(2px 2px at 20% 30%, rgba(88, 91, 211, 0.1), transparent),
+            radial-gradient(2px 2px at 40% 70%, rgba(79, 70, 229, 0.1), transparent),
+            radial-gradient(1px 1px at 60% 20%, rgba(99, 102, 241, 0.1), transparent),
+            radial-gradient(1px 1px at 80% 80%, rgba(88, 91, 211, 0.1), transparent);
+        background-size: 400px 400px, 300px 300px, 200px 200px, 150px 150px;
+        animation: float 15s ease-in-out infinite;
+        pointer-events: none;
+        opacity: 0.3;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        33% { transform: translate(10px, -10px) rotate(120deg); }
+        66% { transform: translate(-5px, 5px) rotate(240deg); }
     }
 }

@@ -34,7 +34,7 @@ const ListadoRelacionesHijo = () => {
     }, []);
 
     return (
-        <div className="listado-hijos-container">
+        <div className="listado-hijos">
             <h2>Relaciones del Hijo</h2>
             {loading ? (
                 <div className="loading">Cargando...</div>
@@ -45,9 +45,9 @@ const ListadoRelacionesHijo = () => {
                     {/* Tabla de Padres */}
                     <h3>Padres</h3>
                     {relaciones.padres.length === 0 ? (
-                        <div className="no-hijos">No hay padres relacionados.</div>
+                        <p>No hay padres relacionados.</p>
                     ) : (
-                        <table className="hijos-table">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -57,8 +57,8 @@ const ListadoRelacionesHijo = () => {
                             <tbody>
                                 {relaciones.padres.map((padre) => (
                                     <tr key={padre.id_usuario}>
-                                        <td>{padre.nombre}</td>
-                                        <td>{padre.correo}</td>
+                                        <td data-label="Nombre">{padre.nombre}</td>
+                                        <td data-label="Correo">{padre.correo}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -68,9 +68,9 @@ const ListadoRelacionesHijo = () => {
                     {/* Tabla de Maestros */}
                     <h3>Maestros</h3>
                     {relaciones.maestros.length === 0 ? (
-                        <div className="no-hijos">No hay maestros relacionados.</div>
+                        <p>No hay maestros relacionados.</p>
                     ) : (
-                        <table className="hijos-table">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -80,8 +80,8 @@ const ListadoRelacionesHijo = () => {
                             <tbody>
                                 {relaciones.maestros.map((maestro) => (
                                     <tr key={maestro.id_usuario}>
-                                        <td>{maestro.nombre}</td>
-                                        <td>{maestro.correo}</td>
+                                        <td data-label="Nombre">{maestro.nombre}</td>
+                                        <td data-label="Correo">{maestro.correo}</td>
                                     </tr>
                                 ))}
                             </tbody>

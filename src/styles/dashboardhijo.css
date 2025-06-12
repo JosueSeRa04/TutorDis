@@ -1,4 +1,6 @@
-/* Estilo para el contenedor del sidebar */
+/* Dashboard.css */
+
+/* Contenedor del sidebar */
 .Dashboard {
   width: 250px;
   height: 95vh;
@@ -7,22 +9,25 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15); /* Sombra más suave y profesional */
   position: fixed;
   top: 0;
   left: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; /* Fuente elegante */
 }
 
-/* Estilo para el título del dashboard */
+/* Título del dashboard */
 .TituloDashboard {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 30px;
   text-align: center;
   color: white;
+  letter-spacing: -0.02em; /* Espaciado sutil para sofisticación */
+  text-transform: uppercase; /* Mayor profesionalidad */
 }
 
-/* Estilo para los botones laterales (links) */
+/* Botones laterales (links) */
 .BotonLateral {
   display: block;
   padding: 12px 15px;
@@ -32,22 +37,25 @@
   text-decoration: none;
   border-radius: 25px;
   font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición más fluida */
+  letter-spacing: 0.03em; /* Espaciado para claridad */
 }
 
-/* Hover para los botones laterales */
 .BotonLateral:hover {
   background-color: #999fe9;
-  transform: translateX(5px);
+  transform: translateX(4px) scale(1.02); /* Animación más sutil y elegante */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra ligera al hover */
 }
 
-/* Estilo para el botón activo (opcional, si usas NavLink) */
+/* Botón activo */
 .BotonLateral.active {
   background-color: #3498db;
-  font-weight: bold;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2); /* Sombra para destacar */
 }
 
-/* Estilo para el botón de cerrar sesión */
+/* Botón de cerrar sesión */
 .BotonCerrar {
   margin-top: auto;
   padding: 12px 15px;
@@ -56,18 +64,20 @@
   border: none;
   border-radius: 25px;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición más suave */
+  letter-spacing: 0.03em;
+  text-transform: uppercase; /* Toque profesional */
 }
 
-/* Hover para el botón de cerrar sesión */
 .BotonCerrar:hover {
   background-color: #c0392b;
-  transform: scale(1.05);
+  transform: translateY(-2px) scale(1.03); /* Animación más refinada */
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3); /* Sombra sutil */
 }
 
-/* Estilo para el botón de cerrar sesión al hacer focus */
 .BotonCerrar:focus {
   outline: none;
-  box-shadow: 0 0 5px rgba(231, 76, 60, 0.7);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.4); /* Halo elegante al enfocar */
 }

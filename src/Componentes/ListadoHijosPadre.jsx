@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/ListadoHijosPadre.css';
 
 const ListadoHijosPadre = () => {
     const [hijos, setHijos] = useState([]);
@@ -9,7 +10,7 @@ const ListadoHijosPadre = () => {
     useEffect(() => {
         const fetchHijos = async () => {
             try {
-                const token = localStorage.getItem('token'); // Obtener el token del almacenamiento
+                const token = localStorage.getItem('token');
                 if (!token) {
                     throw new Error('No se encontró el token de autenticación');
                 }
@@ -24,6 +25,7 @@ const ListadoHijosPadre = () => {
                 setLoading(false);
             } catch (err) {
                 setError(err.message || 'Error al cargar los hijos');
+hijos
                 setLoading(false);
             }
         };
@@ -32,37 +34,37 @@ const ListadoHijosPadre = () => {
     }, []);
 
     if (loading) {
-        return <div>Cargando...</div>;
+        return <div className="listado-hijos"><div className="loading">Cargando...</div></div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div className="listado-hijos"><div className="error">Error: {error}</div></div>;
     }
 
     return (
-        <div>
+        <div className="listado-hijos">
             <h2>Hijos Relacionados</h2>
             {hijos.length === 0 ? (
                 <p>No hay hijos relacionados con este padre.</p>
             ) : (
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <table>
                     <thead>
-                        <tr style={{ backgroundColor: '#f2f2f2' }}>
-                            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Nombre</th>
-                            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Correo</th>
-                            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Nivel de Dificultad</th>
-                            <th style={{ border: '1px solid #ddd', padding: '8px' }}>Accesibilidad</th>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Nivel de Dificultad</th>
+                            <th>Accesibilidad</th>
                         </tr>
                     </thead>
                     <tbody>
                         {hijos.map((hijo) => (
                             <tr key={hijo.id_usuario}>
-                                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{hijo.nombre}</td>
-                                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{hijo.correo}</td>
-                                <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                                <td data-label="Nombre">{hijo.nombre}</td>
+                                <td data-label="Correo">{hijo.correo}</td>
+                                <td data-label="Nivel de Dificultad">
                                     {hijo.nivelDificultad || 'No especificado'}
                                 </td>
-                                <td style={{ border: '1px solid #ddd', padding: '8px' }}>
+                                <td data-label="Accesibilidad">
                                     {hijo.accesibilidad || 'No especificado'}
                                 </td>
                             </tr>

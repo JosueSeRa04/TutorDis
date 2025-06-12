@@ -1,157 +1,473 @@
 /* BuscarHijos.css */
+
+/* Contenedor principal */
 .buscar-hijos {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f4f6f8;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 
+        0 32px 64px rgba(88, 91, 211, 0.12),
+        0 16px 32px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.4);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* Efecto de brillo sutil en el fondo */
+.buscar-hijos::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(88, 91, 211, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(79, 70, 229, 0.03) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Título */
 .buscar-hijos h2 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 20px;
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 700;
+    background: linear-gradient(135deg, #585bd3 0%, #4f46e5 50%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+    text-align: center;
+    animation: slideInDown 0.8s ease-out 0.2s both;
 }
 
+/* Línea decorativa bajo el título */
+.buscar-hijos h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #585bd3, #4f46e5);
+    border-radius: 2px;
+}
+
+/* Formulario de búsqueda */
 .form-busqueda {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 0.8s ease-out 0.3s both;
 }
 
+/* Input de correo */
 .input-correo {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #bdc3c7;
-  border-radius: 5px;
-  font-size: 1rem;
+    flex: 1;
+    padding: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 12px;
+    font-size: 16px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
 }
 
 .input-correo:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    outline: none;
+    border-color: rgba(88, 91, 211, 0.3);
+    box-shadow: 
+        0 8px 16px rgba(88, 91, 211, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
+/* Botón de búsqueda */
 .boton-buscar {
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #585bd3 0%, #4f46e5 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.boton-buscar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(88, 91, 211, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.boton-buscar:hover::before {
+    left: 0;
 }
 
 .boton-buscar:hover {
-  background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 
+        0 16px 32px rgba(88, 91, 211, 0.3),
+        0 8px 16px rgba(88, 91, 211, 0.2);
 }
 
 .boton-buscar:disabled {
-  background-color: #95a5a6;
-  cursor: not-allowed;
+    background: linear-gradient(135deg, #94a3b8 0%, #6b7280 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
+/* Mensajes */
 .mensaje-error {
-  color: #e74c3c;
-  text-align: center;
-  margin: 10px 0;
+    color: #e11d48;
+    text-align: center;
+    font-size: 16px;
+    margin: 16px 0;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 0.8s ease-out 0.4s both;
 }
 
 .mensaje-exito {
-  color: #2ecc71;
-  text-align: center;
-  margin: 10px 0;
+    color: #16a34a;
+    text-align: center;
+    font-size: 16px;
+    margin: 16px 0;
+    position: relative;
+    z-index: 1;
+    animation: slideInUp 0.8s ease-out 0.4s both;
 }
 
+/* Resultados */
 .resultados {
-  margin-top: 20px;
+    margin-top: 32px;
+    position: relative;
+    z-index: 1;
 }
 
 .resultados h3 {
-  color: #2c3e50;
-  margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 16px;
+    animation: slideInLeft 0.8s ease-out 0.5s both;
 }
 
+/* Lista de usuarios */
 .lista-usuarios {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .usuario-item {
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ecf0f1;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+    padding: 20px 24px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    animation: slideInLeft 0.8s ease-out calc(0.6s + var(--delay, 0s)) both;
+}
+
+.usuario-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(88, 91, 211, 0.05) 0%, rgba(79, 70, 229, 0.05) 100%);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.usuario-item:hover::before {
+    left: 0;
 }
 
 .usuario-item:hover {
-  background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 16px 32px rgba(88, 91, 211, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+    border-color: rgba(88, 91, 211, 0.3);
 }
 
 .usuario-item.selected {
-  background-color: #3498db;
-  color: #fff;
+    background: linear-gradient(135deg, #585bd3 0%, #4f46e5 100%);
+    color: #fff;
+    border-color: transparent;
 }
 
+/* Formulario de relaciones */
 .form-relaciones {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    padding: 32px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border-radius: 20px;
+    box-shadow: 
+        0 16px 32px rgba(88, 91, 211, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    animation: slideInUp 0.8s ease-out 0.7s both;
 }
 
 .form-relaciones h3 {
-  color: #2c3e50;
-  margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 24px;
+    animation: slideInLeft 0.8s ease-out 0.8s both;
 }
 
+/* Grupo de formularios */
 .form-group {
-  margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
-  display: block;
-  color: #2c3e50;
-  margin-bottom: 5px;
+    display: block;
+    color: #334155;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 16px;
 }
 
+/* Inputs de formulario */
 .select-input,
 .input-text {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #bdc3c7;
-  border-radius: 5px;
-  font-size: 1rem;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 12px;
+    font-size: 16px;
+    background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
 }
 
 .select-input:focus,
 .input-text:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    outline: none;
+    border-color: rgba(88, 91, 211, 0.3);
+    box-shadow: 
+        0 8px 16px rgba(88, 91, 211, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
+/* Botón de crear */
 .boton-crear {
-  width: 100%;
-  padding: 12px;
-  background-color: #2ecc71;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.boton-crear::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(22, 163, 74, 0.1) 0%, rgba(21, 128, 61, 0.1) 100%);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.boton-crear:hover::before {
+    left: 0;
 }
 
 .boton-crear:hover {
-  background-color: #27ae60;
+    transform: translateY(-3px);
+    box-shadow: 
+        0 16px 32px rgba(22, 163, 74, 0.3),
+        0 8px 16px rgba(22, 163, 74, 0.2);
+}
+
+/* Animaciones de entrada */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .buscar-hijos {
+        margin: 20px 16px;
+        padding: 32px 24px;
+        border-radius: 20px;
+    }
+
+    .buscar-hijos h2 {
+        font-size: 28px;
+        margin-bottom: 16px;
+    }
+
+    .form-busqueda {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+
+    .input-correo,
+    .boton-buscar {
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    .form-relaciones {
+        padding: 24px;
+    }
+
+    .select-input,
+    .input-text,
+    .boton-crear {
+        font-size: 15px;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .buscar-hijos {
+        margin: 16px 12px;
+        padding: 24px 20px;
+    }
+
+    .buscar-hijos h2 {
+        font-size: 24px;
+    }
+
+    .input-correo,
+    .boton-buscar {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .select-input,
+    .input-text,
+    .boton-crear {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+/* Efecto de partículas flotantes */
+@media (prefers-reduced-motion: no-preference) {
+    .buscar-hijos::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            radial-gradient(2px 2px at 20% 30%, rgba(88, 91, 211, 0.1), transparent),
+            radial-gradient(2px 2px at 40% 70%, rgba(79, 70, 229, 0.1), transparent),
+            radial-gradient(1px 1px at 60% 20%, rgba(99, 102, 241, 0.1), transparent),
+            radial-gradient(1px 1px at 80% 80%, rgba(88, 91, 211, 0.1), transparent);
+        background-size: 400px 400px, 300px 300px, 200px 200px, 150px 150px;
+        animation: float 15s ease-in-out infinite;
+        pointer-events: none;
+        opacity: 0.3;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        33% { transform: translate(10px, -10px) rotate(120deg); }
+        66% { transform: translate(-5px, 5px) rotate(240deg); }
+    }
 }

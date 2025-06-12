@@ -34,16 +34,16 @@ const ListadoHijosMaestro = () => {
     }, []);
 
     return (
-        <div className="listado-hijos-container">
+        <div className="listado-hijos">
             <h2>Alumnos Relacionados</h2>
             {loading ? (
                 <div className="loading">Cargando...</div>
             ) : error ? (
                 <div className="error">Error: {error}</div>
             ) : hijos.length === 0 ? (
-                <div className="no-hijos">No hay alumnos relacionados con este maestro.</div>
+                <p>No hay alumnos relacionados con este maestro.</p>
             ) : (
-                <table className="hijos-table">
+                <table>
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -55,10 +55,14 @@ const ListadoHijosMaestro = () => {
                     <tbody>
                         {hijos.map((hijo) => (
                             <tr key={hijo.id_usuario}>
-                                <td>{hijo.nombre}</td>
-                                <td>{hijo.correo}</td>
-                                <td>{hijo.nivelDificultad || <span className="no-especificado"></span>}</td>
-                                <td>{hijo.accesibilidad || <span className="no-especificado"></span>}</td>
+                                <td data-label="Nombre">{hijo.nombre}</td>
+                                <td data-label="Correo">{hijo.correo}</td>
+                                <td data-label="Nivel de Dificultad">
+                                    {hijo.nivelDificultad || 'No especificado'}
+                                </td>
+                                <td data-label="Accesibilidad">
+                                    {hijo.accesibilidad || 'No especificado'}
+                                </td>
                             </tr>
                         ))}
                     </tbody>

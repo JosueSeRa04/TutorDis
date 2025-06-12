@@ -1,77 +1,352 @@
-/* ReportePadre.css */
+/* ReportesPadre.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 .reportes-padre-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #fdfdfd;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 24px;
+  box-shadow: 0 20px 25px -5px rgba(88, 91, 211, 0.1), 
+              0 10px 10px -5px rgba(88, 91, 211, 0.04);
+  overflow: hidden;
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.reportes-padre-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #585bd3, #7c7ff0, #585bd3);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .reportes-padre-container h2 {
+  background: linear-gradient(135deg, #585bd3 0%, #4c4fbe 100%);
+  color: white;
+  margin: 0;
+  padding: 32px 40px;
+  font-size: 28px;
+  font-weight: 600;
   text-align: center;
-  color: #333;
-  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
+.reportes-padre-container h2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Error Messages */
 .error {
-  color: red;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  color: #dc2626;
+  padding: 16px 24px;
+  margin: 20px 40px;
+  border-radius: 12px;
+  border-left: 4px solid #dc2626;
+  font-weight: 500;
   text-align: center;
-  margin-bottom: 1rem;
+  animation: slideIn 0.5s ease-out;
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hijos Lista Section */
 .hijos-lista {
-  margin-bottom: 2rem;
+  background: white;
+  margin: 40px;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px -1px rgba(88, 91, 211, 0.1);
+  border: 1px solid rgba(88, 91, 211, 0.1);
+  position: relative;
+  overflow: hidden;
   text-align: center;
+}
+
+.hijos-lista::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #585bd3, transparent, #585bd3);
 }
 
 .hijos-lista h3 {
-  margin-bottom: 1rem;
-  color: #555;
+  color: #585bd3;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  position: relative;
 }
 
+.hijos-lista h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #585bd3, #7c7ff0);
+  border-radius: 2px;
+}
+
+/* Buttons para hijos */
 .hijos-lista button {
-  margin: 0.3rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #e0e0e0;
-  border-radius: 20px;
+  margin: 8px;
+  padding: 12px 24px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 15px;
+  color: #64748b;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.hijos-lista button.activo,
+.hijos-lista button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(88, 91, 211, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.hijos-lista button:hover::before {
+  left: 100%;
+}
+
 .hijos-lista button:hover {
-  background-color: #4caf50;
+  border-color: #585bd3;
+  color: #585bd3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(88, 91, 211, 0.2);
+}
+
+.hijos-lista button.activo {
+  background: linear-gradient(135deg, #585bd3 0%, #4c4fbe 100%);
+  color: white;
+  border-color: #585bd3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(88, 91, 211, 0.4);
+}
+
+.hijos-lista button.activo:hover {
+  background: linear-gradient(135deg, #4c4fbe 0%, #585bd3 100%);
   color: white;
 }
 
+/* Reportes Lista Section */
 .reportes-lista {
-  margin-top: 2rem;
+  background: white;
+  margin: 0 40px 40px;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px -1px rgba(88, 91, 211, 0.1);
+  border: 1px solid rgba(88, 91, 211, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.reportes-lista::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #585bd3, transparent, #585bd3);
 }
 
 .reportes-lista h3 {
-  margin-bottom: 1rem;
-  color: #444;
+  color: #585bd3;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
   text-align: center;
+  position: relative;
 }
 
+.reportes-lista h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #585bd3, #7c7ff0);
+  border-radius: 2px;
+}
+
+.reportes-lista > p {
+  text-align: center;
+  color: #64748b;
+  font-style: italic;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+}
+
+/* Reporte Cards */
 .reporte-card {
-  background-color: #f0f8ff;
-  border-left: 5px solid #4caf50;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border: 1px solid rgba(88, 91, 211, 0.1);
+  border-left: 4px solid #585bd3;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(88, 91, 211, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.reporte-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(135deg, #585bd3, #7c7ff0);
+  transition: width 0.3s ease;
+}
+
+.reporte-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(88, 91, 211, 0.15);
+  border-left-width: 6px;
+}
+
+.reporte-card:hover::before {
+  width: 6px;
 }
 
 .reporte-card p {
-  margin: 0.3rem 0;
-  color: #333;
+  margin: 12px 0;
+  color: #334155;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.reporte-card p:first-child {
+  margin-top: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(88, 91, 211, 0.1);
+}
+
+.reporte-card p:last-child {
+  margin-bottom: 0;
+  margin-top: 16px;
 }
 
 .reporte-card strong {
-  color: #222;
+  color: #585bd3;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reportes-padre-container {
+    margin: 20px;
+    border-radius: 20px;
+  }
+  
+  .reportes-padre-container h2 {
+    padding: 24px 20px;
+    font-size: 24px;
+  }
+  
+  .hijos-lista,
+  .reportes-lista {
+    margin: 20px;
+    padding: 24px 20px;
+  }
+  
+  .hijos-lista button {
+    margin: 4px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  .reporte-card {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .error {
+    margin: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hijos-lista button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+  }
+  
+  .reporte-card {
+    padding: 16px;
+  }
+  
+  .hijos-lista h3,
+  .reportes-lista h3 {
+    font-size: 18px;
+  }
 }
