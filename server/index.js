@@ -430,6 +430,80 @@ app.get('/api/estadisticas/:id_usuario', authenticateToken, async (req, res) => 
   }
 });
 
+// Obtener los hijos del padre
+app.get('/api/hijos-por-padre/:id_padre', authenticateToken, async (req, res) => {
+  const { id_padre } = req.params;
+  try {
+    const query = `
+      SELECT u.id_usuario, u.nombre
+      FROM "Padre" p
+      JOIN "Usuario" u ON p.id_hijo = u.id_usuario
+      WHERE p.id_usuario = $1
+    `;
+    const result = await pool.query(query, [id_padre]);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Error al obtener hijos del padre' });
+  }
+});
+
+// Obtener los reportes de un hijo específico
+app.get('/api/reportes/:id_hijo', authenticateToken, async (req, res) => {
+  const { id_hijo } = req.params;
+  try {
+    const query = `
+      SELECT r.*, u.nombre
+      FROM "Reporte" r
+      JOIN "Usuario" u ON r.id_usuario = u.id_usuario
+      WHERE r.id_usuario = $1
+      ORDER BY r."fechaGeneracion" DESC
+    `;
+    const result = await pool.query(query, [id_hijo]);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Error al obtener reportes del hijo' });
+  }
+});
+
+// Obtener los hijos del padre
+app.get('/api/hijos-por-padre/:id_padre', authenticateToken, async (req, res) => {
+  const { id_padre } = req.params;
+  try {
+    const query = `
+      SELECT u.id_usuario, u.nombre
+      FROM "Padre" p
+      JOIN "Usuario" u ON p.id_hijo = u.id_usuario
+      WHERE p.id_usuario = $1
+    `;
+    const result = await pool.query(query, [id_padre]);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Error al obtener hijos del padre' });
+  }
+});
+
+// Obtener los reportes de un hijo específico
+app.get('/api/reportes/:id_hijo', authenticateToken, async (req, res) => {
+  const { id_hijo } = req.params;
+  try {
+    const query = `
+      SELECT r.*, u.nombre
+      FROM "Reporte" r
+      JOIN "Usuario" u ON r.id_usuario = u.id_usuario
+      WHERE r.id_usuario = $1
+      ORDER BY r."fechaGeneracion" DESC
+    `;
+    const result = await pool.query(query, [id_hijo]);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: 'Error al obtener reportes del hijo' });
+  }
+});
+
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
