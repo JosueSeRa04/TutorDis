@@ -6,7 +6,7 @@ const ListadoHijosPadre = () => {
     const [hijos, setHijos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const NGROK_URL = process.env.NGROK_URL_EXT;
     useEffect(() => {
         const fetchHijos = async () => {
             try {
@@ -14,10 +14,11 @@ const ListadoHijosPadre = () => {
                 if (!token) {
                     throw new Error('No se encontró el token de autenticación');
                 }
-
-                const response = await axios.get('http://localhost:5000/api/hijos-por-padre', {
+                
+                const response = await axios.get(`${NGROK_URL}/api/hijos-por-padre`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
+                        'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
                     },
                 });
 

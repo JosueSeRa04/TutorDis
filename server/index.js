@@ -13,9 +13,11 @@ const { spawn } = require('child_process');
 const app = express();
 const port = process.env.PORT || 5000;
 
+const API_PORT = 'https://81b1-201-141-122-119.ngrok-free.app';
+
 app.use(cors({
-    origin: 'http://localhost:3000', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin:['http://localhost:3000', API_PORT], 
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
 }));
 app.use(express.json());
@@ -30,7 +32,7 @@ const pool = new Pool({
 });
 
 const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
+    const authHeader = req.headers['authorization'];  
     const token = authHeader && authHeader.split(' ')[1];
 
     if(!token){
@@ -180,6 +182,7 @@ app.get('/api/hijos-por-padre', authenticateToken, async (req, res) => {
 // Mostrar todos los hijos relacionados con el maestro
 app.get('/api/hijos-por-maestro', authenticateToken, async (req, res) => {
     try {
+        console.log("Entre maestro");
         // Verificar que req.user exista
         if (!req.user || !req.user.id_usuario) {
             console.error('req.user no está definido o no contiene id_usuario:', req.user);
@@ -211,13 +214,14 @@ app.get('/api/hijos-por-maestro', authenticateToken, async (req, res) => {
 
 // Mostrar los padres y maestros relacionados con el hijo
 app.get('/api/relaciones-por-hijo', authenticateToken, async (req, res) => {
+    console.log('Hola entreee');
     try {
         // Verificar que req.user exista
         if (!req.user || !req.user.id_usuario) {
             console.error('req.user no está definido o no contiene id_usuario:', req.user);
             return res.status(401).json({ message: 'Usuario no autenticado o datos incompletos' });
         }
-
+        console.log('Headers recibidos:', req.headers);
         // Obtener el id_usuario del hijo desde el token JWT
         const id_hijo = req.user.id_usuario;
         console.log('ID del hijo:', id_hijo); // Para depuración
@@ -312,7 +316,7 @@ app.post('/api/login', async(req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
-
+        
         // Respuesta exitosa
         res.status(200).json({
             token,

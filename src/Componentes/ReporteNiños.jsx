@@ -11,6 +11,7 @@ const ReporteNiños = () => {
   const [loadingAlumno, setLoadingAlumno] = useState(true);
   const [loadingEstadisticas, setLoadingEstadisticas] = useState(false);
   const [error, setError] = useState(null);
+  const NGROK_URL = process.env.NGROK_URL_EXT;
 
   // Supongamos que el id_maestro está guardado en localStorage (puedes adaptarlo)
   const id_maestro = localStorage.getItem('id_usuario');
@@ -25,8 +26,10 @@ const ReporteNiños = () => {
         if (!token) throw new Error('Token no disponible');
 
         // Ejemplo: obtener el primer alumno relacionado al maestro
-        const res = await axios.get('http://localhost:5000/api/hijos-por-maestro', {
-          headers: { Authorization: `Bearer ${token}` }
+        const res = await axios.get(`${NGROK_URL}/api/hijos-por-maestro`, {
+          headers: { Authorization: `Bearer ${token}`,
+                    'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+        },
         });
 
         if (res.data && res.data.length > 0) {
@@ -51,9 +54,10 @@ const ReporteNiños = () => {
     setLoadingEstadisticas(true);
     setError(null);
     try {
+      
       const res = await axios.get(
-        `http://localhost:5000/api/estadisticas/${alumno.id_usuario}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        `${NGROK_URL}/api/estadisticas/${alumno.id_usuario}`,
+        { headers: { Authorization: `Bearer ${token}`, 'ngrok-skip-browser-warning': 'true'  } }
       );
       console.log("Estadísticas crudas recibidas:", res.data);
 
@@ -122,8 +126,9 @@ const generarReporteIA = async () => {
       return;
     }
     try {
+      
       await axios.post(
-        'http://localhost:5000/api/generar-reporte',
+        `${NGROK_URL}/api/generar-reporte`,
         {
           id_usuario: alumno.id_usuario,
           id_maestro,

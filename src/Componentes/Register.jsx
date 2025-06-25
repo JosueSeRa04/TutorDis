@@ -9,12 +9,14 @@ function Register() {
     const [tipoUsuario, setTipoUsuario] = useState('Maestro');
     const [mensaje, setMensaje] = useState('');
     const navigate = useNavigate();
+    const NGROK_URL = process.env.NGROK_URL_EXT;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         try{
-            const response = await fetch('http://localhost:5000/api/register', {
+            
+            const response = await fetch(`${NGROK_URL}/api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type':'application/json'},
                 body: JSON.stringify({

@@ -14,14 +14,15 @@ function Login({ onLogin }) {
         e.preventDefault();
 
         try{
-            const response = await fetch('http://localhost:5000/api/login', {
+            const NGROK_URL = process.env.NGROK_URL_EXT;
+
+            const response = await fetch(`${NGROK_URL}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ correo, contraseña }),
             });
-
             
 
             if(response.ok){

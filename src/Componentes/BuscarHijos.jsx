@@ -18,6 +18,7 @@ const BuscarHijos = () => {
   });
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
+  const NGROK_URL = process.env.NGROK_URL_EXT;
 
   // Obtener token del localStorage (o donde lo almacenes)
   const token = localStorage.getItem('token');
@@ -26,9 +27,10 @@ const BuscarHijos = () => {
   useEffect(() => {
     const fetchPadresMaestros = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/users', {
+        const response = await fetch(`${NGROK_URL}/api/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
+            'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
           },
         });
         if (!response.ok) throw new Error('Error al obtener usuarios');
@@ -62,10 +64,11 @@ const BuscarHijos = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/buscar-hijos?email=${encodeURIComponent(email)}`,
+        `${NGROK_URL}/api/buscar-hijos?email=${encodeURIComponent(email)}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
           },
         }
       );
@@ -121,11 +124,13 @@ const BuscarHijos = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/relaciones', {
+      
+      const response = await fetch(`${NGROK_URL}/api/relaciones`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
+          'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
         },
         body: JSON.stringify({
           id_hijo: selectedHijo.id_usuario,

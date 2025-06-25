@@ -9,14 +9,17 @@ const ReportesPadre = () => {
   const [hijoSeleccionado, setHijoSeleccionado] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const token = localStorage.getItem('token');
-  const id_padre = localStorage.getItem('id_usuario'); // Ajusta si tienes otra lógica
-
+  const id_padre = localStorage.getItem('id_usuario'); 
+  const NGROK_URL = process.env.NGROK_URL_EXT;
   // Obtener hijos del padre
   useEffect(() => {
     const fetchHijos = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/hijos-por-padre/${id_padre}`, {
-          headers: { Authorization: `Bearer ${token}` }
+        
+        const res = await axios.get(`${NGROK_URL}/api/hijos-por-padre/${id_padre}`, {
+          headers: { Authorization: `Bearer ${token}`,
+          'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+         },
         });
         setHijos(res.data);
       } catch (err) {
@@ -30,9 +33,10 @@ const ReportesPadre = () => {
   // Obtener reportes del hijo seleccionado
   const fetchReportesHijo = async (id_hijo) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/reportes/${id_hijo}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await axios.get(`${NGROK_URL}/api/reportes/${id_hijo}`, {
+        headers: { Authorization: `Bearer ${token}`,
+           'ngrok-skip-browser-warning': 'true' // Agrega este encabezado}
+      }});
       setReportes(res.data);
       setHijoSeleccionado(id_hijo);
     } catch (err) {
