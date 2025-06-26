@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import '../styles/Leccion3.css';
 import Chatbot from './Chatbot';
+import { NGROK_URL } from '../config';
 
 function Leccion3() {
   const words = [
@@ -31,7 +32,7 @@ function Leccion3() {
     // Guardar intento en la base de datos
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/guardar-intento', {
+      await axios.post(`${NGROK_URL}/api/guardar-intento`, {
         id_ejercicio: 3, // Lección 3
         resultado: isCorrect ? 'correcto' : 'incorrecto',
         erroresDetectados: isCorrect ? 0 : 1,

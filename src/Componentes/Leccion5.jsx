@@ -4,6 +4,7 @@ import axios from 'axios';
 import paisaje from '../paisaje.jpg';
 import Chatbot from '../Componentes/Chatbot';
 import '../styles/Leccion5.css';
+import { NGROK_URL } from '../config';
 
 const lessonContext = `
 Esta lección se centra en la corrección ortográfica. Los estudiantes describen una imagen y el sistema detecta palabras mal escritas las cuales deben ser corregidas.
@@ -85,7 +86,7 @@ function Leccion5() {
     // GUARDAR INTENTO EN LA BD
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/guardar-intento', {
+      await axios.post(`${NGROK_URL}/api/guardar-intento`, {
         id_ejercicio: 5, // Lección 5
         resultado: allCorrect ? 'correcto' : 'incorrecto',
         erroresDetectados: misspelledWords.length,

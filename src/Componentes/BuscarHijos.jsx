@@ -1,6 +1,7 @@
 // BuscarHijos.jsx
 import React, { useState, useEffect } from 'react';
 import '../styles/BuscarHijos.css';
+import { NGROK_URL } from '../config';
 
 const BuscarHijos = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +19,6 @@ const BuscarHijos = () => {
   });
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
-  const NGROK_URL = process.env.NGROK_URL_EXT;
 
   // Obtener token del localStorage (o donde lo almacenes)
   const token = localStorage.getItem('token');

@@ -6,6 +6,7 @@ import { CSS } from '@dnd-kit/utilities';
 import axios from 'axios';
 import '../styles/Leccion1.css';
 import Chatbot from './Chatbot';
+import { NGROK_URL } from '../config';
 
 const lessonContext = `
 Esta lección enseña a ordenar letras para formar la palabra correcta "CONTRAER" usando una interfaz de arrastrar y soltar. Los estudiantes deben reorganizar las letras desordenadas.
@@ -42,7 +43,7 @@ const Leccion1 = () => {
     // Registrar el intento en la base de datos
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/guardar-intento', {
+      await axios.post(`${NGROK_URL}/api/guardar-intento`, {
         id_ejercicio: 1, 
         resultado: esCorrecto ? 'correcto' : 'incorrecto',
         erroresDetectados: esCorrecto ? 0 : 1,

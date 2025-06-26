@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { NGROK_URL } from '../config';
 import '../styles/ListadoHijosPadre.css';
 
 const ListadoRelacionesHijo = () => {
@@ -16,7 +17,7 @@ const ListadoRelacionesHijo = () => {
                 if (!token) {
                     throw new Error('No se encontró el token de autenticación');
                 }
-                const NGROK_URL = process.env.NGROK_URL_EXT;
+                
                 const response = await axios.get(`${NGROK_URL}/api/relaciones-por-hijo`, {
                     headers: {
                         Authorization: `Bearer ${token}`,

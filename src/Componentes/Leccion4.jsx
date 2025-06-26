@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import '../styles/Leccion4.css';
 import Chatbot from './Chatbot';
+import { NGROK_URL } from '../config';
 
 function Leccion4() {
   const words = [
@@ -47,7 +48,7 @@ function Leccion4() {
     // GUARDAR INTENTO EN EL BACKEND
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/guardar-intento', {
+      await axios.post(`${NGROK_URL}/api/guardar-intento`, {
         id_ejercicio: 4, // Lección 4
         resultado: isCorrect ? 'correcto' : 'incorrecto',
         erroresDetectados: incorrectAnswers.length,

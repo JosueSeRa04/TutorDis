@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/ListadoHijosPadre.css';
+import { NGROK_URL } from '../config';
 
 const ListadoHijosPadre = () => {
     const [hijos, setHijos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const NGROK_URL = process.env.NGROK_URL_EXT;
     useEffect(() => {
         const fetchHijos = async () => {
             try {

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/homepage.css'
 import Logo from '../Logo.png';
+import { NGROK_URL } from '../config';
 
 function Login({ onLogin }) {
     const [correo, setCorreo] = useState('');
@@ -14,7 +15,8 @@ function Login({ onLogin }) {
         e.preventDefault();
 
         try{
-            const NGROK_URL = process.env.NGROK_URL_EXT;
+            
+            console.log(NGROK_URL);
 
             const response = await fetch(`${NGROK_URL}/api/login`, {
                 method: 'POST',

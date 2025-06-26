@@ -8,6 +8,7 @@ const Chatbot = forwardRef(({ lessonContext }, ref) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const CHAT_GROK = 'https://fbbb-34-142-250-56.ngrok-free.app';
 
   useImperativeHandle(ref, () => ({
     handleErrorDetected
@@ -19,13 +20,19 @@ const Chatbot = forwardRef(({ lessonContext }, ref) => {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    console.log("Hola entreeee");
 
     try {
-      const response = await axios.post('http://localhost:8000/chat', {
+      const response = await axios.post(`${CHAT_GROK}/chat`, {
         prompt: input,
         lesson_context: lessonContext,
         error_data: null,
-      });
+      }, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          'Content-Type': 'application/json',
+        }});
+      
       const botMessage = { role: 'bot', content: response.data.response };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
@@ -34,6 +41,7 @@ const Chatbot = forwardRef(({ lessonContext }, ref) => {
         content: `Error: ${error.response?.data?.error || 'No se pudo conectar con el chatbot.'}`,
       };
       setMessages((prev) => [...prev, errorMessage]);
+      console.error('Error en la solicitud:', error);
     } finally {
       setIsLoading(false);
     }
@@ -43,11 +51,15 @@ const Chatbot = forwardRef(({ lessonContext }, ref) => {
     if (!errorData) return;
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/chat', {
+      const response = await axios.post(`${CHAT_GROK}/chat`, {
         prompt: "Proporciona retroalimentación sobre el error cometido.",
         lesson_context: lessonContext,
         error_data: errorData,
-      });
+      }, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          'Content-Type': 'application/json',
+        }});
       const botMessage = { role: 'bot', content: response.data.response };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
@@ -56,6 +68,7 @@ const Chatbot = forwardRef(({ lessonContext }, ref) => {
         content: `Error: ${error.response?.data?.error || 'No se pudo conectar con el chatbot.'}`,
       };
       setMessages((prev) => [...prev, errorMessage]);
+      console.error('Error en la solicitud:', error);
     } finally {
       setIsLoading(false);
     }

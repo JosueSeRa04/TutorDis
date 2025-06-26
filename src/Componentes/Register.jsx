@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/homepage.css'
+import { NGROK_URL } from '../config';
 
 function Register() {
     const [nombre, setNombre] = useState('');
@@ -9,7 +10,7 @@ function Register() {
     const [tipoUsuario, setTipoUsuario] = useState('Maestro');
     const [mensaje, setMensaje] = useState('');
     const navigate = useNavigate();
-    const NGROK_URL = process.env.NGROK_URL_EXT;
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();

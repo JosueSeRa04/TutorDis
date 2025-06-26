@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/ReporteNiños.css';
+import { NGROK_URL } from '../config';
 
 const ReporteNiños = () => {
   const [alumno, setAlumno] = useState(null);
@@ -11,7 +12,8 @@ const ReporteNiños = () => {
   const [loadingAlumno, setLoadingAlumno] = useState(true);
   const [loadingEstadisticas, setLoadingEstadisticas] = useState(false);
   const [error, setError] = useState(null);
-  const NGROK_URL = process.env.NGROK_URL_EXT;
+  const CHAT_GROK = 'https://fbbb-34-142-250-56.ngrok-free.app';
+  
 
   // Supongamos que el id_maestro está guardado en localStorage (puedes adaptarlo)
   const id_maestro = localStorage.getItem('id_usuario');
@@ -100,10 +102,14 @@ const generarReporteIA = async () => {
 
   try {
     console.log("Generando reporte (Se hizo la solicitud)")
-    const res = await axios.post("http://localhost:8000/generar-reporte-ia", {
+    const res = await axios.post(`${CHAT_GROK}/generar-reporte-ia`, {
       nombre_alumno: alumno.nombre,
       estadisticas: estadisticas,
-    });
+    }, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          'Content-Type': 'application/json',
+        }});
 
     if (res.data.reporte) {
       setContenidoReporte(res.data.reporte);

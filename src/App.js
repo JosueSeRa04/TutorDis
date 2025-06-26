@@ -26,7 +26,6 @@ import ReportesPadre from './Componentes/ReportesPadre';
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   // Verificar si el usuario está autenticado al cargar la aplicación
   useEffect(() => {
     const token = localStorage.getItem('token');

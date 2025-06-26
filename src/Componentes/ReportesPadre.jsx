@@ -1,7 +1,8 @@
 // ReportesPadre.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/ReportesPadre.css'
+import '../styles/ReportesPadre.css';
+import { NGROK_URL } from '../config';
 
 const ReportesPadre = () => {
   const [hijos, setHijos] = useState([]);
@@ -10,7 +11,7 @@ const ReportesPadre = () => {
   const [mensaje, setMensaje] = useState('');
   const token = localStorage.getItem('token');
   const id_padre = localStorage.getItem('id_usuario'); 
-  const NGROK_URL = process.env.NGROK_URL_EXT;
+
   // Obtener hijos del padre
   useEffect(() => {
     const fetchHijos = async () => {
