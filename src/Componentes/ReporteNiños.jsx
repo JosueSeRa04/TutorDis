@@ -12,7 +12,7 @@ const ReporteNiños = () => {
   const [loadingAlumno, setLoadingAlumno] = useState(true);
   const [loadingEstadisticas, setLoadingEstadisticas] = useState(false);
   const [error, setError] = useState(null);
-  const CHAT_GROK = 'https://fbbb-34-142-250-56.ngrok-free.app';
+  const CHAT_GROK = 'https://5da9-35-201-173-35.ngrok-free.app';
   
 
   // Supongamos que el id_maestro está guardado en localStorage (puedes adaptarlo)

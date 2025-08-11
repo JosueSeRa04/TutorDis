@@ -8,7 +8,7 @@ const Chatbot = forwardRef(({ lessonContext }, ref) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const CHAT_GROK = 'https://fbbb-34-142-250-56.ngrok-free.app';
+  const CHAT_GROK = 'https://5da9-35-201-173-35.ngrok-free.app';
 
   useImperativeHandle(ref, () => ({
     handleErrorDetected

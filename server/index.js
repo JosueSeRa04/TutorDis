@@ -13,7 +13,7 @@ const { spawn } = require('child_process');
 const app = express();
 const port = process.env.PORT || 5000;
 
-const API_PORT = 'https://3970-201-141-122-119.ngrok-free.app';
+const API_PORT = 'https://bd79-201-141-122-119.ngrok-free.app';
 
 app.use(cors({
     origin:['http://localhost:3000', API_PORT], 
