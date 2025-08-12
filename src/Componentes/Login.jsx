@@ -50,7 +50,7 @@ function Login({ onLogin }) {
             }
         } catch(error){
             console.error('Error:', error);
-            setErrorMessage('Error al conectar con el servidor jajajaj');
+            setErrorMessage('Error al conectar con el servidor');
         }
     };
 

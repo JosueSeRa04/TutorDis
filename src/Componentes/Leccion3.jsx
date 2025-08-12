@@ -33,7 +33,7 @@ function Leccion3() {
     try {
       const token = localStorage.getItem('token');
       await axios.post(`${NGROK_URL}/api/guardar-intento`, {
-        id_ejercicio: 3, // Lección 3
+        id_ejercicio: 3,
         resultado: isCorrect ? 'correcto' : 'incorrecto',
         erroresDetectados: isCorrect ? 0 : 1,
       }, {
@@ -46,7 +46,7 @@ function Leccion3() {
       console.error('Error al guardar intento:', error);
     }
 
-    // 2. Activar retroalimentación del chatbot si fue incorrecto
+    // Activar retroalimentación del chatbot si fue incorrecto
     if (!isCorrect && chatbotRef.current) {
       chatbotRef.current.handleErrorDetected({
         selected_word: word,

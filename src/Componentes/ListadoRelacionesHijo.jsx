@@ -13,7 +13,6 @@ const ListadoRelacionesHijo = () => {
         const fetchRelaciones = async () => {
             try {
                 const token = localStorage.getItem('token');
-                console.log('Token enviado:', token); // Para depuración
                 if (!token) {
                     throw new Error('No se encontró el token de autenticación');
                 }

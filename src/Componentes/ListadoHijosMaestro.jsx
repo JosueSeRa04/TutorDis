@@ -19,7 +19,7 @@ const ListadoHijosMaestro = () => {
                 const response = await axios.get(`${NGROK_URL}/api/hijos-por-maestro`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+                        'ngrok-skip-browser-warning': 'true' 
                     },
                 });
 

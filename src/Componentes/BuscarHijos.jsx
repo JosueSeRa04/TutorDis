@@ -20,17 +20,17 @@ const BuscarHijos = () => {
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
 
-  // Obtener token del localStorage (o donde lo almacenes)
+  // Obtener token del localStorage
   const token = localStorage.getItem('token');
 
-  // Cargar padres y maestros al montar el componente
+
   useEffect(() => {
     const fetchPadresMaestros = async () => {
       try {
         const response = await fetch(`${NGROK_URL}/api/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+            'ngrok-skip-browser-warning': 'true'
           },
         });
         if (!response.ok) throw new Error('Error al obtener usuarios');
@@ -44,7 +44,6 @@ const BuscarHijos = () => {
     fetchPadresMaestros();
   }, [token]);
 
-  // Manejar cambio en el input de búsqueda
   const handleInputChange = (e) => {
     setEmail(e.target.value);
     setError('');
@@ -53,7 +52,6 @@ const BuscarHijos = () => {
     setFormSuccess('');
   };
 
-  // Manejar la búsqueda de hijos
   const handleSearch = async (e) => {
     e.preventDefault();
     setError('');
@@ -68,7 +66,7 @@ const BuscarHijos = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+            'ngrok-skip-browser-warning': 'true'
           },
         }
       );
@@ -92,7 +90,6 @@ const BuscarHijos = () => {
     }
   };
 
-  // Manejar selección de hijo
   const handleSelectHijo = (hijo) => {
     setSelectedHijo(hijo);
     setFormData({
@@ -105,14 +102,12 @@ const BuscarHijos = () => {
     setFormSuccess('');
   };
 
-  // Manejar cambio en los inputs del formulario de relaciones
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setFormError('');
   };
 
-  // Manejar envío del formulario de relaciones
   const handleRelacionesSubmit = async (e) => {
     e.preventDefault();
     setFormError('');
@@ -130,7 +125,7 @@ const BuscarHijos = () => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
-          'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+          'ngrok-skip-browser-warning': 'true'
         },
         body: JSON.stringify({
           id_hijo: selectedHijo.id_usuario,

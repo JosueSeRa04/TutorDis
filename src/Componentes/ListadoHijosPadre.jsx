@@ -18,7 +18,7 @@ const ListadoHijosPadre = () => {
                 const response = await axios.get(`${NGROK_URL}/api/hijos-por-padre`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+                        'ngrok-skip-browser-warning': 'true' 
                     },
                 });
 

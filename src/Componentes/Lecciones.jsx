@@ -28,7 +28,7 @@ function Lecciones() {
                         </Link>
                         <span className="leccion-titulo">{leccion.titulo}</span>
                         
-                        {/* Línea conectora (excepto en la última lección) */}
+                        {/* Línea conectora */}
                         {index < lecciones.length - 1 && (
                             <div className="connector-line"></div>
                         )}

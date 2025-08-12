@@ -22,7 +22,6 @@ function DashboardTeacher({onLogout}){
     
             
             if(!token){
-                // Si no hay token regresar al inicio de sesion
                 navigate('/');
             } else {
                 setTipoUsuario(tipoUser);

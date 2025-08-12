@@ -7,7 +7,7 @@ import Leccion2 from './Leccion2';
 import Leccion3 from './Leccion3';
 import Leccion4 from './Leccion4';
 import Leccion5 from './Leccion5';
-import '../styles/ExportarPDF.css'; // estilos opcionales
+import '../styles/ExportarPDF.css';
 
 const ExportarPDF = () => {
   const [seleccionadas, setSeleccionadas] = useState([]);

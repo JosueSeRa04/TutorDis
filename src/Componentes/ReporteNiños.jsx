@@ -14,12 +14,9 @@ const ReporteNiños = () => {
   const [error, setError] = useState(null);
   const CHAT_GROK = 'https://5da9-35-201-173-35.ngrok-free.app';
   
-
-  // Supongamos que el id_maestro está guardado en localStorage (puedes adaptarlo)
   const id_maestro = localStorage.getItem('id_usuario');
   const token = localStorage.getItem('token');
 
-  // Paso 1: Obtener un alumno automáticamente
   useEffect(() => {
     const fetchAlumno = async () => {
       setLoadingAlumno(true);
@@ -27,15 +24,14 @@ const ReporteNiños = () => {
       try {
         if (!token) throw new Error('Token no disponible');
 
-        // Ejemplo: obtener el primer alumno relacionado al maestro
         const res = await axios.get(`${NGROK_URL}/api/hijos-por-maestro`, {
           headers: { Authorization: `Bearer ${token}`,
-                    'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+                    'ngrok-skip-browser-warning': 'true' 
         },
         });
 
         if (res.data && res.data.length > 0) {
-          setAlumno(res.data[0]); // tomar primer alumno para reporte
+          setAlumno(res.data[0]); 
         } else {
           setError('No hay alumnos disponibles para el maestro');
         }
@@ -62,16 +58,13 @@ const ReporteNiños = () => {
         { headers: { Authorization: `Bearer ${token}`, 'ngrok-skip-browser-warning': 'true'  } }
       );
       console.log("Estadísticas crudas recibidas:", res.data);
-
-      // Paso 1: Extraer valores con validación
+      
       const totalIntentos = parseInt(res.data.total_intentos) || 0;
       const promedioErrores = parseFloat(res.data.promedio_errores) || 0;
 
-      // Paso 2: Calcular valores adicionales
       const puntajeTotal = Math.max(0, (100 - promedioErrores * 20)) * totalIntentos;
       const desempeno = Math.max(0, 100 - promedioErrores * 20);
 
-      // Paso 3: Crear objeto completo con estadísticas
       const estadisticasCalculadas = {
         total_intentos: totalIntentos,
         promedio_errores: promedioErrores,
@@ -118,7 +111,7 @@ const generarReporteIA = async () => {
       setMensaje("No se pudo generar el reporte automáticamente.");
     }
   } catch (error) {
-    console.error("❌ Error al generar reporte IA:", error);
+    console.error("Error al generar reporte IA:", error);
     setMensaje("Error al generar el reporte con IA.");
   }
 };

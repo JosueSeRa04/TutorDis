@@ -19,7 +19,7 @@ const ReportesPadre = () => {
         
         const res = await axios.get(`${NGROK_URL}/api/hijos-por-padre/${id_padre}`, {
           headers: { Authorization: `Bearer ${token}`,
-          'ngrok-skip-browser-warning': 'true' // Agrega este encabezado
+          'ngrok-skip-browser-warning': 'true' 
          },
         });
         setHijos(res.data);
@@ -31,12 +31,11 @@ const ReportesPadre = () => {
     fetchHijos();
   }, [id_padre, token]);
 
-  // Obtener reportes del hijo seleccionado
   const fetchReportesHijo = async (id_hijo) => {
     try {
       const res = await axios.get(`${NGROK_URL}/api/reportes/${id_hijo}`, {
         headers: { Authorization: `Bearer ${token}`,
-           'ngrok-skip-browser-warning': 'true' // Agrega este encabezado}
+           'ngrok-skip-browser-warning': 'true'
       }});
       setReportes(res.data);
       setHijoSeleccionado(id_hijo);

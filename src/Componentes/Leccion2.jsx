@@ -39,7 +39,7 @@ function Leccion2() {
     try {
       const token = localStorage.getItem('token');
       await axios.post(`${NGROK_URL}/api/guardar-intento`, {
-        id_ejercicio: 2, // Lección 2
+        id_ejercicio: 2, 
         resultado: isCorrect ? 'correcto' : 'incorrecto',
         erroresDetectados: isCorrect ? 0 : 1,
       }, {
